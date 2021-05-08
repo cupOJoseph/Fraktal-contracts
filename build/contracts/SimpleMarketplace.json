@@ -1,0 +1,189 @@
+{
+  "contractName": "SimpleMarketplace",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.0+commit.c7dfd78e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/home/joseph/Desktop/Fraktal-contracts/contracts/SimpleMarketplace.sol\":\"SimpleMarketplace\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/joseph/Desktop/Fraktal-contracts/contracts/SimpleMarketplace.sol\":{\"keccak256\":\"0x951d3521d49626604f43a75527a1f510d77f2afb0fe8c203653d080316e0311c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://bd4921e408daf720c4d1482baa65505d04e090a9b4e4ed0f51f9e5dc1f61906f\",\"dweb:/ipfs/QmYwLJ1hPDPTKmyPYYQxHANeGKo9cvjeNoBoUAGRF9Jcrc\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea26469706673582212203aa2af23e8af1d5471c29d1c5c1b80099a6ee8863d44bde645442df37892b2b164736f6c63430008000033",
+  "deployedBytecode": "0x6080604052600080fdfea26469706673582212203aa2af23e8af1d5471c29d1c5c1b80099a6ee8863d44bde645442df37892b2b164736f6c63430008000033",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "66:59:2:-:0;;;97:26;;;;;;;;;;66:59;;;;;;",
+  "deployedSourceMap": "66:59:2:-:0;;;;;",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity >=0.4.22 <0.9.0;\n\ncontract SimpleMarketplace {\n  constructor() public {\n  }\n}\n",
+  "sourcePath": "/home/joseph/Desktop/Fraktal-contracts/contracts/SimpleMarketplace.sol",
+  "ast": {
+    "absolutePath": "/home/joseph/Desktop/Fraktal-contracts/contracts/SimpleMarketplace.sol",
+    "exportedSymbols": {
+      "SimpleMarketplace": [
+        68
+      ]
+    },
+    "id": 69,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 63,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".22",
+          "<",
+          "0.9",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:32:2"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 68,
+        "linearizedBaseContracts": [
+          68
+        ],
+        "name": "SimpleMarketplace",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 66,
+              "nodeType": "Block",
+              "src": "118:5:2",
+              "statements": []
+            },
+            "id": 67,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 64,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "108:2:2"
+            },
+            "returnParameters": {
+              "id": 65,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "118:0:2"
+            },
+            "scope": 68,
+            "src": "97:26:2",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "scope": 69,
+        "src": "66:59:2"
+      }
+    ],
+    "src": "32:94:2"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/joseph/Desktop/Fraktal-contracts/contracts/SimpleMarketplace.sol",
+    "exportedSymbols": {
+      "SimpleMarketplace": [
+        68
+      ]
+    },
+    "id": 69,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 63,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".22",
+          "<",
+          "0.9",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:32:2"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 68,
+        "linearizedBaseContracts": [
+          68
+        ],
+        "name": "SimpleMarketplace",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 66,
+              "nodeType": "Block",
+              "src": "118:5:2",
+              "statements": []
+            },
+            "id": 67,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 64,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "108:2:2"
+            },
+            "returnParameters": {
+              "id": 65,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "118:0:2"
+            },
+            "scope": 68,
+            "src": "97:26:2",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "scope": 69,
+        "src": "66:59:2"
+      }
+    ],
+    "src": "32:94:2"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.0+commit.c7dfd78e.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.3.4",
+  "updatedAt": "2021-04-19T15:59:46.587Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}
