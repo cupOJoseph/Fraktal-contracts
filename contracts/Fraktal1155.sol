@@ -19,6 +19,10 @@ contract Fraktal1155 is Ownable{
 
   uint mintingFee;
 
+  //Track owner address -> tokenId int -> send to address -> shares voted
+  mapping (address => (uint => (address => uint))) private transferVotes;
+
+
   //EVENTS
   event Minted(uint nftId, uint sharedId, string URI);
   event TransferedContractOwner();
@@ -42,7 +46,7 @@ contract Fraktal1155 is Ownable{
   }
 
   //TODO
-  //getter shares id from token, and reverse
+  //getter shares id from tokenreverse
 
   /*
    * Lookup the owner of an NFT and get the percentage of their ownership.
@@ -58,5 +62,39 @@ contract Fraktal1155 is Ownable{
     FeeSet(mintingFee);
   }
 
+  /*
+   * Users can lock their shares in order to vote on transfering the entire NFT to one address
+   */
+   mapping (address => (uint => uint)) lockedShares;
+
+  function lockSharesTransfer(uint _tokenId, uint numShares, address _to) {
+    //Owner must have this many shares.
+    require(getPercentByNFT(msg.sender, _tokenId) - lockedshares[msg.sender][_tokenId] >= numShares);
+    //Track owner address -> tokenId int -> send to address -> shares voted
+    mapping (address => (uint => (address => uint))) private
+    transferVotes[];
+    //TODO lock the existing shares.
+  }
+
+  function unlockSharesTransfer(uint _tokenId, uint numShares, address _to){
+
+  }
+
+  function getLockedTransferShares(uint _tokenId) public view returns (uint) {
+    return
+  }
+
+  function getLockedTransferShares(uint _tokenId, address _to) public view returns (uint) {
+
+  }
+
+  function processFullShareTransfer() {
+
+  }
+
+  function transfer() { //override default 1155
+    //require shares arent locked being sent for the FT
+    //require all shares are locked for the same send for the NFT
+  }
 
 }
