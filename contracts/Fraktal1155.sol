@@ -19,14 +19,14 @@ contract Fraktal1155 is Ownable{
 
   uint mintingFee;
 
-  //Track owner address -> tokenId int -> send to address -> shares voted
-  mapping (address => (uint => (address => uint))) private transferVotes;
-
 
   //EVENTS
-  event Minted(uint nftId, uint sharedId, string URI);
+  event Minted(uint nftId, uint sharedId, address shareOwner, string URI);
   event TransferedContractOwner();
   event FeeSet(uint fee);
+  event LockedSharesForTransfer(address shareOwner, uint tokenId, address to, uint numShares);
+  event UnlockedSharesForTransfer();
+
 
   constructor() public {
     mintingFee = 0;
@@ -63,21 +63,27 @@ contract Fraktal1155 is Ownable{
   }
 
   /*
+   * NFT TRANSFERS BY SHARE
    * Users can lock their shares in order to vote on transfering the entire NFT to one address
    */
-   mapping (address => (uint => uint)) lockedShares;
+   //track number of total shares an owner has locked on an NFT. owner=>tokenId=>num shares locked
+   mapping (address => (uint => uint)) private lockedShares;
+   //Track owner address -> tokenId int -> send to address -> shares voted
+   mapping (address => (uint => (address => uint))) private transferVotes;
+   //track total locked to a particular transfer tokenId => to address => amount of shares voting this way total;
+   mapping (uint => (address => uint)) lockedToTotal;
 
   function lockSharesTransfer(uint _tokenId, uint numShares, address _to) {
-    //Owner must have this many shares.
+    //Owner must have this many shares, and they much be unlocked.
     require(getPercentByNFT(msg.sender, _tokenId) - lockedshares[msg.sender][_tokenId] >= numShares);
-    //Track owner address -> tokenId int -> send to address -> shares voted
-    mapping (address => (uint => (address => uint))) private
-    transferVotes[];
-    //TODO lock the existing shares.
+
+    lockedShares[msg.sender][_tokenId] += numShares;
+    transferVotes[msg.sender][_tokenId][_to] += numShares;
+    lockedToTotal[_tokenId][_to] += numShares;
   }
 
   function unlockSharesTransfer(uint _tokenId, uint numShares, address _to){
-
+    require(lockedshares[msg.sender][_tokenId][_to] >= numShares); //must have enough shares to unlock;
   }
 
   function getLockedTransferShares(uint _tokenId) public view returns (uint) {
