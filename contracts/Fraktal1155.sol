@@ -69,7 +69,7 @@ contract Fraktal1155 is Ownable{
    //track number of total shares an owner has locked on an NFT. owner=>tokenId=>num shares locked
    mapping (address => mapping (uint => uint)) private lockedShares;
    //Track owner address -> tokenId int -> send to address -> shares voted
-   mapping (address => mapping (uint => (address => uint))) private transferVotes;
+   mapping (address => mapping (uint => mapping (address => uint))) private transferVotes;
    //track total locked to a particular transfer tokenId => to address => amount of shares voting this way total;
    mapping (uint => mapping (address => uint)) lockedToTotal;
 
