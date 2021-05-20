@@ -67,11 +67,11 @@ contract Fraktal1155 is Ownable{
    * Users can lock their shares in order to vote on transfering the entire NFT to one address
    */
    //track number of total shares an owner has locked on an NFT. owner=>tokenId=>num shares locked
-   mapping (address => (uint => uint)) private lockedShares;
+   mapping (address => mapping (uint => uint)) private lockedShares;
    //Track owner address -> tokenId int -> send to address -> shares voted
-   mapping (address => (uint => (address => uint))) private transferVotes;
+   mapping (address => mapping (uint => (address => uint))) private transferVotes;
    //track total locked to a particular transfer tokenId => to address => amount of shares voting this way total;
-   mapping (uint => (address => uint)) lockedToTotal;
+   mapping (uint => mapping (address => uint)) lockedToTotal;
 
   function lockSharesTransfer(uint _tokenId, uint numShares, address _to) {
     //Owner must have this many shares, and they much be unlocked.
