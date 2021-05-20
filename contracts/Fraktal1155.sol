@@ -73,7 +73,7 @@ contract Fraktal1155 is Ownable{
    //track total locked to a particular transfer tokenId => to address => amount of shares voting this way total;
    mapping (uint => mapping (address => uint)) lockedToTotal;
 
-  function lockSharesTransfer(uint _tokenId, uint numShares, address _to) {
+  function lockSharesTransfer(uint _tokenId, uint numShares, address _to) public {
     //Owner must have this many shares, and they much be unlocked.
     require(getPercentByNFT(msg.sender, _tokenId) - lockedshares[msg.sender][_tokenId] >= numShares);
 
@@ -84,7 +84,7 @@ contract Fraktal1155 is Ownable{
     emit LockedSharesForTransfer(msg.sender, _tokenId, _to, numShares);
   }
 
-  function unlockSharesTransfer(uint _tokenId, uint numShares, address _to){
+  function unlockSharesTransfer(uint _tokenId, uint numShares, address _to) public {
     require(lockedshares[msg.sender][_tokenId][_to] >= numShares); //must have enough shares to unlock;
 
     lockedShares[msg.sender][_tokenId] -= numShares;
@@ -98,11 +98,11 @@ contract Fraktal1155 is Ownable{
     return
   }*/
 
-  function getLockedTransferShares(uint _tokenId, address _to) public view returns (uint) {
+  function getLockedTransferShares(uint _tokenId, address _to) public view returns (uint) public {
     return lockedToTotal[_tokenId][_to];
   }
 
-  function processFullShareTransfer() {
+  function processFullShareTransfer() public {
 
   }
 
