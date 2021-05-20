@@ -94,12 +94,12 @@ contract Fraktal1155 is Ownable{
     emit UnlockedSharesForTransfer(msg.sender, _tokenId, _to, numShares);
   }
 
-  function getLockedTransferShares(uint _tokenId) public view returns (uint) {
+  /*function getLockedTransferShares(uint _tokenId) public view returns (uint) {
     return
-  }
+  }*/
 
   function getLockedTransferShares(uint _tokenId, address _to) public view returns (uint) {
-
+    return lockedToTotal[_tokenId][_to];
   }
 
   function processFullShareTransfer() {
