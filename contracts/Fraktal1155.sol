@@ -25,7 +25,7 @@ contract Fraktal1155 is Ownable{
   event TransferedContractOwner();
   event FeeSet(uint fee);
   event LockedSharesForTransfer(address shareOwner, uint tokenId, address to, uint numShares);
-  event UnlockedSharesForTransfer();
+  event UnlockedSharesForTransfer(address shareOwner, uint tokenId, address to, uint numShares);
 
 
   constructor() public {
@@ -80,10 +80,18 @@ contract Fraktal1155 is Ownable{
     lockedShares[msg.sender][_tokenId] += numShares;
     transferVotes[msg.sender][_tokenId][_to] += numShares;
     lockedToTotal[_tokenId][_to] += numShares;
+
+    emit LockedSharesForTransfer(msg.sender, _tokenId, _to, numShares);
   }
 
   function unlockSharesTransfer(uint _tokenId, uint numShares, address _to){
     require(lockedshares[msg.sender][_tokenId][_to] >= numShares); //must have enough shares to unlock;
+
+    lockedShares[msg.sender][_tokenId] -= numShares;
+    transferVotes[msg.sender][_tokenId][_to] -= numShares;
+    lockedToTotal[_tokenId][_to] -= numShares;
+
+    emit UnlockedSharesForTransfer(msg.sender, _tokenId, _to, numShares);
   }
 
   function getLockedTransferShares(uint _tokenId) public view returns (uint) {
@@ -98,9 +106,59 @@ contract Fraktal1155 is Ownable{
 
   }
 
-  function transfer() { //override default 1155
-    //require shares arent locked being sent for the FT
-    //require all shares are locked for the same send for the NFT
-  }
+  /*
+    *override default 1155 transfers
+    *require shares arent locked being sent for the FT
+    *require all shares are locked for the same send for the NFT
+  */
+  function safeTransferFrom(
+        address from,
+        address to,
+        uint256 id,
+        uint256 amount,
+        bytes memory data
+    )
+        public
+        override
+    {
+        //Fractal Requirements
+        if(tokenIdToShares[id] > 0){
+          //this is an NFT, require all the shares are locked
+          require(
+            (lockedToTotal[id][to] == 10000)
+            &&  (from == _msgSender() || isApprovedForAll(from, _msgSender())),
+              "ERC1155: caller has not transferLocked this many shares to this transfer."
+          );
+          }
+        else{
+          //these are shares
+          //Owner must have this many shares, and they much be unlocked.
+          require(
+            (getPercentByNFT(msg.sender, _tokenId) - lockedshares[msg.sender][_tokenId] >= amount)
+            &&  (from == _msgSender() || isApprovedForAll(from, _msgSender())),
+              "Fraktal ERC1155: caller does not have this many unlocked shares."
+          );
+        }
+
+
+        require(to != address(0), "ERC1155: transfer to the zero address");
+        require(
+            from == _msgSender() || isApprovedForAll(from, _msgSender()),
+            "ERC1155: caller is not owner nor approved"
+        );
+
+        address operator = _msgSender();
+
+        _beforeTokenTransfer(operator, from, to, _asSingletonArray(id), _asSingletonArray(amount), data);
+
+        uint256 fromBalance = _balances[id][from];
+        require(fromBalance >= amount, "ERC1155: insufficient balance for transfer");
+        _balances[id][from] = fromBalance - amount;
+        _balances[id][to] += amount;
+
+        emit TransferSingle(operator, from, to, id, amount);
+
+        _doSafeTransferAcceptanceCheck(operator, from, to, id, amount, data);
+    }
 
 }
