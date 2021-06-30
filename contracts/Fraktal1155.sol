@@ -8,16 +8,16 @@ import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
 
-contract Fraktal1155 is Ownable{
+contract Fraktal1155 is Ownable, ERC1155{
 
   //maps the 1155 id from the shares tokens to the NFT id.
-  mapping (uint => uint) tokenIdToShares;
-  mapping(uint => uint) sharesIdToToken;
+  mapping (uint => uint) public tokenIdToShares;
+  mapping(uint => uint) public sharesIdToToken;
 
   using Counters for Counters.Counter;
   Counters.Counter private _tokenIds;
 
-  uint mintingFee;
+  uint public mintingFee;
 
 
   //EVENTS
